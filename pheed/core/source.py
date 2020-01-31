@@ -5,8 +5,13 @@ import abc
 import typing
 
 from pheed.core.article import Article
+from pheed.core.common import PheedException
 
 Results = typing.List[Article]
+
+
+class SourceException(PheedException):
+    """Exception related to behavior of sources"""
 
 
 class Source(abc.ABC):
