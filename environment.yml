@@ -1,0 +1,15 @@
+name: pheed-env
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  - codecov
+  - pip
+  - python=3.7
+  - pytest
+  - scrapy
+  - pip:
+      - apsjournals
+      - arxiv
