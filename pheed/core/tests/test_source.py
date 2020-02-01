@@ -4,8 +4,7 @@ from pheed.core import source
 
 
 class DummySource(source.Source):
-    def __init__(self, name: str):
-        self.name = name
+    pass
 
 
 class TestSource:
