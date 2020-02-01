@@ -33,11 +33,25 @@ _JOURNAL_LOOKUP = {j.name: j for j in _JOURNALS}
 
 
 class APSSource(source.Source):
+    """An APS source is a wrapper around the APSJournals library "Journal" concept
+    """
+
     def __init__(self, name: str):
+        """Create an APS Source
+
+        Args:
+            name:
+                str, must be a known APS publication
+        """
+        # Check that name is a known APS Publication
         if name not in _JOURNAL_LOOKUP:
             raise source.SourceException(
                 'Unknown APS Journal: {!r}. Options are {}'.format(name, ', '.join(_JOURNAL_LOOKUP.keys())))
-        self.name = name
+
+        # Call Base Source Constructor
+        super().__init__(name)
+
+        # APS - specific source attributes
         self.journal = _JOURNAL_LOOKUP[name]
 
     def search(self, **kwargs) -> Results:
@@ -78,6 +92,6 @@ def aps_article_to_pheed_article(article: APSArticle) -> Article:
         Pheed Article
     """
     return Article(title=article.name,
-                   authors=[aps_author_to_pheed_author(a) for a in article.authors],
+                   authors=tuple([aps_author_to_pheed_author(a) for a in article.authors]),
                    url=article.url,
                    summary=article.teaser)

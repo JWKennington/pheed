@@ -19,6 +19,18 @@ class Source(abc.ABC):
     Note, this class is an abstract base class and therefore is not intended to be instantiated directly.
     """
 
+    def __init__(self, name: str):
+        """Create a source
+
+        Args:
+            name:
+                str, the name of the source
+
+        Notes:
+              BaseClass: This __init__ is not intended to be called directly
+        """
+        self.name = name
+
     def search(self, **kwargs) -> Results:
         raise NotImplementedError
 
